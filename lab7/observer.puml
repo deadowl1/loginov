@@ -1,0 +1,25 @@
+@startuml
+title Observer: оповещение о сформированной отправке
+
+interface ShipmentListener {
+  +onShipmentFormed(centerName, shipmentId) : void
+}
+
+class LogisticsCenter {
+  -listeners : List<ShipmentListener>
+  +addListener(listener) : void
+  +removeListener(listener) : void
+  +shipmentFormed(shipmentId) : void
+}
+
+class WarehouseBoard
+class DispatchJournal
+class ClientSmsNotifier
+class CustomsSystem
+
+LogisticsCenter o--> ShipmentListener : уведомляет
+ShipmentListener <|.. WarehouseBoard
+ShipmentListener <|.. DispatchJournal
+ShipmentListener <|.. ClientSmsNotifier
+ShipmentListener <|.. CustomsSystem
+@enduml

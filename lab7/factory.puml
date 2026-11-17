@@ -1,0 +1,37 @@
+@startuml
+title Factory Method: создание упаковки (Логистический центр)
+
+interface Packaging {
+  +description() : String
+  +maxWeightKg() : double
+}
+
+abstract class PackagingCreator {
+  +{abstract} createPackaging(maxWeightKg) : Packaging
+}
+
+class CardboardBox
+class WoodenPallet
+class StretchFilm
+class IsoContainer
+
+class CardboardBoxCreator
+class WoodenPalletCreator
+class StretchFilmCreator
+class IsoContainerCreator
+
+Packaging <|.. CardboardBox
+Packaging <|.. WoodenPallet
+Packaging <|.. StretchFilm
+Packaging <|.. IsoContainer
+
+PackagingCreator <|-- CardboardBoxCreator
+PackagingCreator <|-- WoodenPalletCreator
+PackagingCreator <|-- StretchFilmCreator
+PackagingCreator <|-- IsoContainerCreator
+
+CardboardBoxCreator ..> CardboardBox : создает
+WoodenPalletCreator ..> WoodenPallet : создает
+StretchFilmCreator ..> StretchFilm : создает
+IsoContainerCreator ..> IsoContainer : создает
+@enduml
